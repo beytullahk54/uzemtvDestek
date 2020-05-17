@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+
+<head>
+    <link rel="icon" type="image/png" sizes="16x16" href="">
+    <title>Api Testleri</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta name="author" content="Phoenixcoded" />
+    <!-- Favicon icon -->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+    <!-- vendor css -->
+	<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v4">
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+
+</head>
+<body style="background-color: white;" class="">
+
+<div id="app">
+  
+  
+  <div class="ticket">
+  
+    <!-- Ticket header -->
+    <div class="header">
+      <div class="chat-icon" >
+        <svg enable-background="new 0 0 100 100" height="100px" id="Layer_1" version="1.1" viewBox="0 0 100 100" width="100px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M70.707,38.291H29.293c-1.295,0-2.344,1.049-2.344,2.344c0,1.294,1.049,2.344,2.344,2.344h41.414  c1.295,0,2.344-1.049,2.344-2.344C73.051,39.34,72.002,38.291,70.707,38.291z"/><path d="M70.707,26.572H29.293c-1.295,0-2.344,1.049-2.344,2.344c0,1.294,1.049,2.344,2.344,2.344h41.414  c1.295,0,2.344-1.049,2.344-2.344S72.002,26.572,70.707,26.572z"/><path d="M70.707,50.01H29.293c-1.295,0-2.344,1.049-2.344,2.344s1.049,2.344,2.344,2.344h41.414c1.295,0,2.344-1.049,2.344-2.344  S72.002,50.01,70.707,50.01z"/><path d="M82.443,7.921H17.556C10.633,7.921,5,13.553,5,20.477v40.315c0,6.924,5.633,12.556,12.556,12.556h33.491  c0.204,0.016,0.658,0.203,0.803,0.33l16.853,16.848c1.28,1.283,2.508,1.555,3.312,1.555c1.278,0,2.443-0.67,3.119-1.792  c0.445-0.738,0.672-1.646,0.672-2.701V73.348h6.641C89.367,73.348,95,67.716,95,60.792V20.477C95,13.553,89.367,7.921,82.443,7.921z   M89.376,60.792L89.376,60.792c-0.001,3.821-3.11,6.931-6.933,6.931h-7.019c-2.894,0-5.248,2.354-5.248,5.248v11.076L55.832,69.704  c-1.159-1.166-3.119-1.981-4.766-1.981h-33.51c-3.821,0-6.931-3.108-6.931-6.931V20.477c0-3.821,3.109-6.931,6.931-6.931h64.889  c3.82,0,6.931,3.109,6.931,6.931V60.792z"/></svg>
+      </div>
+      <div class="title">
+      <h2>Destek Talebinde Bulun </h2>
+      </div>
+    </div>
+    
+    <!-- Ticket body -->
+    <div class="content">
+      
+      <form action="https://batuhan.kodlooper.com/destekkaydet" method="POST">
+        <input type="hidden" name="_token" value="QriXpNHBMG8bbyqdMU9d3sOA7PjQfYACEwF7y71X">
+        <div class="input">
+          <label for="">Adınız</label> 
+          <input type="text" name="ticket_user_name" v-model="ticket_user_name" placeholder="Adınız" required/>
+        </div>
+        <div class="input">
+          <label for="">Soyadınız</label> 
+          <input type="text" name="ticket_sur_name" v-model="ticket_sur_name" placeholder="Soyadınız" required/>
+        </div>
+  
+        <div class="input">
+          <label for="">Mail Adresiniz</label>
+          <input type="email" name="ticket_mail" v-model="ticket_mail" placeholder="ogrenci@mailadersi.com" required/>
+        </div>
+        <div class="input">
+          <label for="">Talep Başlığı</label>
+          <input type="text" name="ticket_title" v-model="ticket_title" placeholder="Mesaj Başlığınız" required/>
+        </div>
+  
+        <div class="input">
+          <label for="">Talep İçeriği</label>
+          <textarea name="ticket_message" v-model="ticket_message" id="" cols="30" rows="10"></textarea>
+        </div>
+        <div class="input">
+            <label for="">Destek Talebini Kime İletmek İstiyorsun ?</label>
+            <select name="ticket_who" v-model="ticket_who" class="form-control">
+              <option disabled value="">Lütfen Seçim Yapın</option>
+                <option value="Eğitmen">Eğitmen</option>
+                <option value="Teknik Destek">Teknik Destek</option>
+              </select>
+        </div>
+        <div class="input">
+            <label for="">Hangi Konuda Destek Talebinde Bulunmak İstiyorsun ?</label>
+            <select class="form-control" v-model="ticket_sub" name="ticket_sub" required>
+              <option disabled value="">Lütfen Seçim Yapın</option>
+                <option value="Ders">Ders</option>
+                <option value="Sınav">Sınav</option>
+                <option value="Ders Notu">Ders Notu</option>
+                <option value="Ödev">Ödev</option>
+              </select>
+        </div>
+  
+        <div class="checkbox">
+          <input type="checkbox" v-model="ticket_confirmation" name="ticket_confirmation" true-value="on"
+          false-value="off" id="checkbox-teamviewer" checked/>
+          <label for="checkbox-teamviewer" class="checkbox-label">Paylaşılmasına İzin Veriyorum</label>
+        </div>
+      
+    </div>
+  
+    <!-- Ticket footer -->
+        <div class="footer">
+          <button v-on:click="yolla" class="button btn-block">Talep Yolla</button>
+        </div>
+      </form> 
+  </div>
+</div>
+
+    <!-- Required Js -->
+    <script src="assets/js/vendor-all.min.js"></script>
+    <script src="assets/js/plugins/bootstrap.min.js"></script>
+    <script src="assets/js/ripple.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script>
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      ticket_url: '{{URL::Asset("")}}',
+      ticket_user_name:'',
+      ticket_sur_name:'',
+      ticket_mail:'',
+      ticket_title:'',
+      ticket_message:'',
+      ticket_who:'',
+      ticket_sub:'',
+      ticket_confirmation:'',
+      __token:'{{ csrf_token() }}'
+    },
+    methods: {
+      yolla() {
+        
+        let formData = new FormData();
+        formData.append('ticket_user_name',vm.ticket_user_name);
+        formData.append('ticket_sur_name',vm.ticket_sur_name); 
+        formData.append('ticket_mail',vm.ticket_mail);
+        formData.append('ticket_title',vm.ticket_title);
+        formData.append('ticket_message',vm.ticket_message);
+        formData.append('ticket_who',vm.ticket_who);
+        formData.append('ticket_sub',vm.ticket_sub);
+        formData.append('ticket_url',vm.ticket_url);
+        formData.append('__token',vm.__token);
+        formData.append('ticket_confirmation',vm.ticket_confirmation);
+
+        axios.post('https://destek.uzem.tv/apiyolla',formData)
+        .then(function(response){
+          console.log(response.data)
+          if(response.data==true)
+          {
+            vm.ticket_user_name='';
+            vm.ticket_sur_name='';
+            vm.ticket_mail='';
+            vm.ticket_title='';
+            vm.ticket_message='';
+            vm.ticket_who='';
+            vm.ticket_sub='';
+            vm.ticket_confirmation='';
+            
+            swal("Başarılı!", "Destek İsteğiniz Başarılı Bir Şeklilde Gönderildi", "success");
+
+          }
+          else
+          {
+            console.log('Başarısız');
+          }
+        });
+
+        
+      }
+    }
+  });
+	</script>
+
+
+</body>
+
+</html>
