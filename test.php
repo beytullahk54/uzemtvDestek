@@ -8,4 +8,5 @@ function deneme($id)
 }
 
 echo deneme(5);
+//bakalım ne olacak
 ?>
