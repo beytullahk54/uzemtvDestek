@@ -1,2 +1,3 @@
 Merhaba Burası Öylesine ÇAılmıs Bir Şablon Dosyası
 burayı batuhan yazdı
+//batuhan
